@@ -42,4 +42,4 @@ while (isSunk == false) {
 
 //Tell user stats
 let stats = `You took ${numGuesses} guesses to sink the battleship, which means your shooting accuracy was ${(3/numGuesses) * 100}%`;
-alert(stats)
+alert(stats);
