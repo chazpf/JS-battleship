@@ -15,6 +15,7 @@ div#messageArea {
 	top: 0px;
 	left: 0px;
 	color: rgb(83, 175, 19);
+	font-size: 2.5em;
 }
 
 table {
@@ -31,7 +32,7 @@ td {
 
 form {
 	position: absolute;
-	bottom: 0px;
+	top: 0px;
 	right: 0px;
 	padding: 15px;
 	background-color: rgb(83, 175, 19);
