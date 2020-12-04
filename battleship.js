@@ -71,7 +71,7 @@ function parseGuess(guess) {
 		alert('Oops, please enter a letter and a number on the board.');
 	} else {
 		let firstChar = guess.charAt(0);
-		let row = alphabet.indexOf(firstChar);
+		let row = alphabet.indexOf(firstChar.toUpperCase());
 		let column = guess.charAt(1);
 		if (isNaN(row) || isNaN(column)) {
 			alert(`Oops, this isn't on the board.`);
@@ -84,64 +84,26 @@ function parseGuess(guess) {
 	return null;
 }
 
-controller.processGuess('A0');
+function init() {
+	let fireButton = document.getElementById('fireButton');
+	fireButton.onclick = handleFireButton;
+	let guessInput = document.getElementById('guessInput');
+	guessInput.onkeypress = handleKeyPress;
+}
 
-controller.processGuess('A6');
-controller.processGuess('B6');
-controller.processGuess('C6');
+function handleFireButton() {
+	let guessInput = document.getElementById('guessInput');
+	let guess = guessInput.value;
+	controller.processGuess(guess);
+	guessInput.value = '';
+}
 
-controller.processGuess('C4');
-controller.processGuess('D4');
-controller.processGuess('E4');
-
-controller.processGuess('B0');
-controller.processGuess('B1');
-controller.processGuess('B2');
-
-/* OLD OLD OLD OLD OLD OLD OLD
-//Declare initial variables
-let randomLoc = Math.floor(Math.random() * 5);
-let location1 = randomLoc;
-let location2 = location1 + 1;
-let location3 = location2 + 1;
-let guess;
-let alreadyGuessed = [];
-let numHits = 0;
-let numGuesses = 0;
-let isSunk = false;
-let checkNum = /[^0-9]/g;
-
-
-//Loop while the ship is not sunk
-while (isSunk == false) {
-	guess = prompt('Ready, aim, fire! (enter a number from 0-6):');
-	if (checkNum.test(guess)) {
-		alert(`I don't understand those symbols! Please enter a number.`);
-	} else {
-		if (alreadyGuessed.includes(guess)) {
-			alert(`You've already guessed that number! Please try again.`);
-		} else {
-			if (guess < 0 || guess > 6) {
-				alert('Please enter a valid number! (0-6 only)');
-			} else {
-				alreadyGuessed.push(guess);
-				numGuesses += 1;
-				if (guess == location1 || guess == location2 || guess ==location3) {
-					alert('HIT!');
-					numHits += 1;
-					if (numHits == 3) {
-						isSunk = true;
-						alert('You sunk my battleship!');
-					}
-				} else {
-					alert('MISS!');
-				}
-			}
-		}
+function handleKeyPress(e) {
+	let fireButton = document.getElementById('fireButton');
+	if (e.keyCode === 13) {
+		fireButton.click();
+		return false;
 	}
 }
 
-//Tell user stats
-let stats = `You took ${numGuesses} guesses to sink the battleship, which means your shooting accuracy was ${(3/numGuesses) * 100}%`;
-alert(stats);
-*/
+window.onload = init;
